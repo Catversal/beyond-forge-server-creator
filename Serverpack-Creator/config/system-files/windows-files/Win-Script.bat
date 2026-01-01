@@ -307,7 +307,6 @@ if %INSTALL_RESULT% EQU 0 (
 )
 
 :SkipForgeinstall
-pause >nul
 
 cls
 echo.
