@@ -189,12 +189,10 @@ echo [OK] Copy step finished.
 timeout /t 2
 
 Rem Löschen von Mods
-set "REMOVE_LIST="
 
-if "%MODPACK%"=="1" set "REMOVE_LIST=%LISTS%\beyond_ascension_remove.txt"
-if "%MODPACK%"=="2" set "REMOVE_LIST=%LISTS%\beyond_cosmos_remove.txt"
-if "%MODPACK%"=="3" set "REMOVE_LIST=%LISTS%\beyond_depth_remove.txt"
+set "Remove=%ROOT%config\system-files\windows-files\Remove-Lists.bat"
 
+call "%Remove%"
 
 REM ===== Remove-Liste prüfen =====
 if not exist "%REMOVE_LIST%" (
@@ -575,22 +573,13 @@ echo by Catversal
 echo.
 echo [INFO] Grabbing Server Icon...
 
-if "%MODPACK%"=="1" (
-    set "ICON_URL=https://media.forgecdn.net/avatars/thumbnails/1311/957/64/64/638853138308838053_animated.gif"
-)
+REM --- Download server icon ---
 
-if "%MODPACK%"=="2" (
-    set "ICON_URL=https://media.forgecdn.net/avatars/thumbnails/1319/80/64/64/638857668194537957_animated.gif"
-)
-
-if "%MODPACK%"=="3" (
-    set "ICON_URL=https://media.forgecdn.net/avatars/thumbnails/1311/962/64/64/638853142230249135_animated.gif"
-)
-powershell -Command ^
-    "Invoke-WebRequest '%ICON_URL%' -OutFile '%SERVERPACK%\server-icon.png'"
+set "Server-Icon_Script=%ROOT%config\system-files\windows-files\Server-Icon.bat"
 
 echo Server-Icon set: %SERVERPACK%\server-icon.png
 
+call "%Server-Icon_Script%"
 
 if "%hostingtype%"=="1" goto :SkipJ
 goto :FinalMessage
