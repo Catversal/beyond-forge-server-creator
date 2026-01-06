@@ -34,8 +34,7 @@ if [ -f "$Client_Pack/config" ]; then
             break
         fi
     fi
-else
-
+fi
     echo ============================================
     echo
     echo     Serverpack Builder - Beyond Packs
@@ -64,3 +63,7 @@ else
     echo - Do NOT copy the parent folder itself
     echo
     read -p "Press ENTER once you have finished copying the files."
+
+done
+
+echo debug test
