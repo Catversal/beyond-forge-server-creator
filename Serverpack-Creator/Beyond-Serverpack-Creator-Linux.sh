@@ -121,7 +121,7 @@ done
 sleep 2
 
 export Main_Path Client_Pack Map_File Lists Linux_Script hostingtype
-bash "$Linux_Script"
+source "$Linux_Script"
 
 exit 0
 
