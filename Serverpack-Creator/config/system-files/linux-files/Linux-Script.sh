@@ -256,7 +256,7 @@ read -r
 
 if [ "$hostingtype" = "2" ]; then
 
-# == Forge Server installieren ==
+  # == Forge Server installieren ==
 
     Forge_Installer="$Base_Serverpack_Folder/forge-$MC_Version-$MANIFEST_FORGE-installer.jar"
     Forge_Url="https://maven.minecraftforge.net/net/minecraftforge/forge/$MC_Version-$MANIFEST_FORGE/forge-$MC_Version-$MANIFEST_FORGE-installer.jar"
