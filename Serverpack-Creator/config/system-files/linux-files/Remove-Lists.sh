@@ -19,4 +19,4 @@ elif [ "$Modpack" = "4" ]; then
 fi
 
 export REMOVE_LIST
-exit 0
+return

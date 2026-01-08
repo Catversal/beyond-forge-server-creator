@@ -23,4 +23,4 @@ Server_ICON=$Base_Serverpack_Folder/server-icon.png
 wget -O "$SERVER_ICON" "$ICON_URL"
 
 
-exit 0
+return

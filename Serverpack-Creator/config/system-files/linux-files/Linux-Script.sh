@@ -194,7 +194,7 @@ sleep 2
 
 remove_list_scirpt="$Main_Path/config/system-files/linux-files/Remove-Lists.sh"
 export Main_Path Lists Modpack Base_Serverpack_Folder 
-bash "$remove_list_scirpt"
+source "$remove_list_scirpt"
 
 # Zu ergänzen Remove List nicht exestent
 
@@ -390,7 +390,6 @@ if [ "$hostingtype" = "2" ]; then
     TOTAL_RAM_GB=$((TOTAL_RAM_MB / 1024))
 
     echo [Info] Detected System RAM: $TOTAL_RAM_GB GB
-    #!/bin/bash
 
     # --- Ask for RAM input ---
     read -p "How many GB of RAM should be allocated to the server? [default 6]: " RAM_GB
@@ -544,7 +543,7 @@ sleep 2
 Server-Icon_Script="$Main_Path\config\system-files\linux-files\Server-Icon.sh"
 
 export Base_Serverpack_Folder
-bash "$Server-Icon_Script"
+source "$Server-Icon_Script"
 
 
 if [ "$hostingtype" = "2" ]; then
@@ -590,4 +589,4 @@ else
 
 fi
 
-exit 0
+return
