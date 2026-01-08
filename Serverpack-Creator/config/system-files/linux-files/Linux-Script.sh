@@ -145,7 +145,7 @@ sleep 2
 # Zielordner anlegen
 
 Count=1
-Base_Serverpack_Folder="$Main_Path/serverpacks/$DisplayName_$MANIFEST_VERSION_$Count"
+Base_Serverpack_Folder="$Main_Path/$DisplayName_$MANIFEST_VERSION_$Count"
 
 while [ -d "$Base_Serverpack_Folder" ]; do
   Count=$Count+1
