@@ -66,24 +66,24 @@ else
     echo ====================================================
     echo
 
-    
-    /* if [ -d "$Client_Pack/config" ] then
-        sleep 1 
-    else
-        echo "- The 'config' folder is missing"
-    fi
-    if [ -d "$Client_Pack/mods" ] then
-      sleep 1
-    else
-        echo "- The 'mods' folder is missing"
-    fi
-    
-    if [ -f "$Client_Pack/manifest.json" ]  then
-       sleep 1
-    else
-        echo "- The 'manifest.json' file is missing"
-    fi
-    */
+    # 
+    # if [ -d "$Client_Pack/config" ] then
+    #     sleep 1 
+    # else
+    #     echo "- The 'config' folder is missing"
+    # fi
+    # if [ -d "$Client_Pack/mods" ] then
+    #   sleep 1
+    # else
+    #     echo "- The 'mods' folder is missing"
+    # fi
+    # 
+    # if [ -f "$Client_Pack/manifest.json" ]  then
+    #    sleep 1
+    # else
+    #     echo "- The 'manifest.json' file is missing"
+    # fi
+    # */
     echo
     read -p "Press ENTER once you have finished copying the files."
 fi
