@@ -117,14 +117,14 @@ sleep 2
 
 Map_File="$Main_Path/config/modpack_map.txt"
 
-while IFS='|' read -r A B C D E; do
+while IFS='|' read -r A B C D E || [ -n "$A" ]; do
   # A=ID, B=Name, C=DisplayName, D=MC, E=Flag
   Modpack=$A
   Name=$B
   DisplayName=$C
   MC_Version=$D
   Flag=$E
- < "$Map_File"
+done < "$Map_File"
 
 clear
 echo

@@ -71,7 +71,7 @@ echo creation of a Serverpack for the Beyond Packs.
 echo
 echo It Supports the Following Packs:
 echo
-while IFS='|' read -r A B C D E; do
+while IFS='|' read -r A B C D E || [ -n "$A" ]; do
   # A=ID, B=Name, C=DisplayName, D=MC, E=Flag
   echo "$B"
 done < "$Map_File"
