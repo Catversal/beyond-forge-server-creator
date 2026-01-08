@@ -32,7 +32,6 @@ if [ -d "$Client_Pack/config" ] \
     echo "Client Pack Found! Complete Continuing..."
     sleep 2
     break
-fi
 
 else
 
@@ -66,6 +65,8 @@ else
     echo Info:
     echo ====================================================
     echo
+
+    
     if [ -d "$Client_Pack/config" ] then
     
     else
