@@ -34,8 +34,9 @@ if [ -d "$Client_Pack/config" ] \
     break
 fi
 
+else
+
     echo ============================================
-    echo
     echo     Serverpack Builder - Beyond Packs
     echo ============================================
     echo by Catversal
@@ -61,8 +62,528 @@ fi
     echo - Copy ONLY the contents all files and folders INSIDE the modpack folder...
     echo - Do NOT copy the parent folder itself
     echo
+    echo ====================================================
+    echo Info:
+    echo ====================================================
+    echo
+    if [ -d "$Client_Pack/config" ] then
+    
+    else
+        echo "- The 'config' folder is missing"
+    fi
+    if [ -d "$Client_Pack/mods" ] then
+    
+    else
+        echo "- The 'mods' folder is missing"
+    fi
+    if [ -f "$Client_Pack/manifest.json" ]  then
+    else
+        echo "- The 'manifest.json' file is missing"
+    fi
+    echo
     read -p "Press ENTER once you have finished copying the files."
+fi
 
+# Manifest.json lesen
+
+MANIFEST_VERSION=$(grep -oP '"version"\s*:\s*"\K[^"]+' \
+  "$Client_Pack/manifest.json")
+
+MANIFEST_FORGE=$(grep -oP '"id"\s*:\s*"forge-[^"]+' \
+  "$Client_Pack/manifest.json" | head -n1)
+MANIFEST_FORGE="${MANIFEST_FORGE#forge-}"
+
+MANIFEST_NAME=$(grep -oP '"name"\s*:\s*"\K[^"]+' \
+  "$Client_Pack/manifest.json")
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo ====================================================
+echo [INFO] Modpack name from manifest.json:
+echo ====================================================
+echo
+echo   $MANIFEST_NAME
+echo
+sleep 2
+
+
+
+while IFS='|' read -r A B C D E; do
+  # A=ID, B=Name, C=DisplayName, D=MC, E=Flag
+  Modpack=$A
+  Name=$B
+  DisplayName=$C
+  MC_Version=$D
+  Flag=$E
+ < "$Map_File"
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo ====================================================
+echo [INFO] Detected Modpack:
+echo ====================================================
+echo
+echo   $DisplayName "("$Modpack")"
+echo   MC Version: $MC_Version | Forge Version: $MANIFEST_FORGE Copy_Tacz= $Flag
+echo
+sleep 2
+
+# Zielordner anlegen
+
+Count=1
+Base_Serverpack_Folder="$Main_Path/serverpacks/$DisplayName_$MANIFEST_VERSION_$Count"
+
+while [ -d "$Base_Serverpack_Folder" ]; do
+  Count=$Count+1
 done
 
-echo debug test
+mkdir -p "$Base_Serverpack_Folder"
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo [INFO] Serverpack folder Created:
+echo $Base_Serverpack_Folder
+echo
+sleep 2
+
+# Copy Files
+
+echo Copying Server Files ...
+cp -r "$Client_Pack/config" "$Base_Serverpack_Folder/"
+cp -r "$Client_Pack/mods" "$Base_Serverpack_Folder/"
+cp -r "$Client_Pack/defaultconfigs" "$Base_Serverpack_Folder/"
+cp -r "$Client_Pack/kubejs" "$Base_Serverpack_Folder/"
+
+if $Flag==1; then
+  echo Copying Tacz Files ...
+  cp -r "$Client_Pack/tacz_backup" "$Base_Serverpack_Folder/"
+fi
+echo
+
+clear
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo ====================================================
+echo [INFO] Serverpack Copy Complete!
+echo ====================================================
+echo
+sleep 2
+
+
+remove_list_scirpt="$Main_Path/config/system-files/linux-files/Remove-Lists.sh"
+export Main_Path Lists Modpack Base_Serverpack_Folder 
+bash "$remove_list_scirpt"
+
+# Zu ergänzen Remove List nicht exestent
+
+clear
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo 
+echo [Info] Removing client-only mods using list:
+echo $REMOVE_LIST
+echo
+sleep 2
+
+# expandiert Globs zu nichts, wenn keine Treffer
+shopt -s nullglob
+
+# Zeile für Zeile verarbeiten (auch letzte Zeile ohne NL)
+while IFS= read -r PREFIX || [ -n "$PREFIX" ]; do
+  # Windows CR entfernen
+  PREFIX="${PREFIX%%$'\r'}"
+  [ -z "$PREFIX" ] && continue
+
+  for jar in "$Base_Serverpack_Folder/mods/${PREFIX}"*.jar; do
+    if [ -f "$jar" ]; then
+      echo "[DEL] $(basename "$jar")"
+      rm -f -- "$jar"
+    fi
+  done
+done < "$REMOVE_LIST"
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo [OK] Mod removal step finished.
+echo
+echo ==================================================
+echo  [INFO] Java is required to run this server
+echo --------------------------------------------------
+echo  Please make sure you have Java 17, 18 or 21 installed. (not higher versions)
+echo
+echo  Recommended for this server: Java 21 
+echo
+echo  You can download Java (Eclipse Temurin) here:
+echo  https://adoptium.net/de/temurin/releases
+echo ==================================================
+echo
+echo Press ENTER to continue
+echo
+read -r
+
+
+
+
+if [ "$hostingtype" = "2" ]; then
+
+# == Forge Server installieren ==
+
+    Forge_Installer="$Base_Serverpack_Folder/forge-$MC_Version-$MANIFEST_FORGE-installer.jar"
+    Forge_Url="https://maven.minecraftforge.net/net/minecraftforge/forge/$MC_Version-$MANIFEST_FORGE/forge-$MC_Version-$MANIFEST_FORGE-installer.jar"
+
+    echo Downloading Forge Installer ...
+    wget -O "$Forge_Installer" "$Forge_Url"
+    echo
+    fi
+
+
+    clear
+    echo
+    echo ============================================
+    echo     Serverpack Builder - Beyond Packs
+    echo ============================================
+    echo by Catversal
+    echo
+    echo [INFO] Running Forge installer --installServer...
+    echo
+    sleep 2
+    # --- Run installer in target directory ---
+    
+
+    cd "$Base_Serverpack_Folder"
+    java -jar "$Forge_Installer" --installServer
+    cd "$Main_Path"
+
+
+fi
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo [INFO] Writing server.properties...
+echo
+sleep 2
+
+cat > "$Base_Serverpack_Folder/server.properties" <<EOF
+#Minecraft server properties
+#Generated by setup script
+allow-flight=true
+allow-nether=true
+broadcast-console-to-ops=true
+broadcast-rcon-to-ops=true
+difficulty=normal
+enable-command-block=true
+enable-jmx-monitoring=false
+enable-query=false
+enable-rcon=false
+enable-status=true
+enforce-secure-profile=true
+enforce-whitelist=false
+entity-broadcast-range-percentage=100
+force-gamemode=false
+function-permission-level=2
+gamemode=survival
+generate-structures=true
+generator-settings={}
+hardcore=false
+hide-online-players=false
+initial-disabled-packs=
+initial-enabled-packs=vanilla
+level-name=world
+level-seed=
+level-type=minecraft\:normal
+max-chained-neighbor-updates=1000000
+max-players=200
+max-tick-time=-1
+max-world-size=29999984
+motd=\u00A74\u00A7lBeyond Modpack \u00A76 | \u00A71 $DisplayName\u00A7r\n\u00A74by Blueversal  \u00A76      |\u00A71 $MANIFEST_VERSION
+network-compression-threshold=1024
+online-mode=true
+op-permission-level=4
+player-idle-timeout=0
+prevent-proxy-connections=false
+pvp=true
+query.port=25565
+rate-limit=0
+rcon.password=
+rcon.port=25575
+require-resource-pack=false
+resource-pack=
+resource-pack-prompt=
+resource-pack-sha1=
+server-ip=
+server-port=25565
+simulation-distance=
+spawn-animals=true
+spawn-monsters=true
+spawn-npcs=true
+spawn-protection=0
+sync-chunk-writes=true
+text-filtering-config=
+use-native-transport=true
+view-distance=20
+white-list=false
+EOF
+
+# Ram Allocation
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo ============================================
+echo   Dedicated server RAM Allocation
+echo   Recomanded Ram for Pack
+echo --------------------------------------------
+if [ "$Modpack" = "1" ]; then
+    echo " Beyond Ascension:  8GB Base + 1 GB per Player"
+elif [ "$Modpack" = "2" ]; then
+    echo " Beyond Cosmos: 8 GB + 1 GB per Player"
+elif [ "$Modpack" = "3" ]; then
+    echo " Beyond Depths: 6 GB + 1 GB per Player"
+elif [ "$Modpack" = "4" ]; then
+    echo " Beyond Depths Insanity: 8 GB + 1 GB per Player"
+fi
+echo ============================================
+echo
+sleep 5
+if [ "$hostingtype" = "2" ]; then
+    TOTAL_RAM_KB=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
+    TOTAL_RAM_MB=$((TOTAL_RAM_KB / 1024))
+    TOTAL_RAM_GB=$((TOTAL_RAM_MB / 1024))
+
+    echo [Info] Detected System RAM: $TOTAL_RAM_GB GB
+    #!/bin/bash
+
+    # --- Ask for RAM input ---
+    read -p "How many GB of RAM should be allocated to the server? [default 6]: " RAM_GB
+
+    # --- Default if empty ---
+    if [[ -z "$RAM_GB" ]]; then
+      RAM_GB=6
+    fi
+
+    # --- Validate numeric input ---
+    if ! [[ "$RAM_GB" =~ ^[0-9]+$ ]]; then
+      echo
+      echo "[WARN] Invalid RAM input detected. Using default: 6 GB."
+      RAM_GB=6
+    fi
+
+    echo "[INFO] Changing Xms ..."
+    
+    # --- Xms policy: Xms = half of Xmx (minimum 2G) ---
+    XMS_GB=$((RAM_GB / 2))
+    if (( XMS_GB < 2 )); then
+      XMS_GB=2
+    fi
+
+    echo "[INFO] Xmx = ${RAM_GB}G"
+    echo "[INFO] Xms = ${XMS_GB}G"
+    sleep 3
+fi
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal  
+echo
+# --- Ask for JVM args ---
+read -p "Add recommended JVM arguments? (Y/N) [default Y]: " ADD_JVM_ARGS
+
+# --- Default if empty ---
+if [[ -z "$ADD_JVM_ARGS" ]]; then
+  ADD_JVM_ARGS="Y"
+fi
+
+# --- Normalize input (y/n → Y/N) ---
+ADD_JVM_ARGS=$(echo "$ADD_JVM_ARGS" | tr '[:lower:]' '[:upper:]')
+
+# --- JVM args file path ---
+JVM_ARGS_FILE="$Base_Serverpack_Folder/user_jvm_args.txt"
+
+
+if [[ "$ADD_JVM_ARGS" == "Y" ]]; then
+    cat > "$JVM_ARGS_FILE" << EOF
+    # Xmx and Xms set the maximum and minimum RAM usage, respectively.
+    # They can take any number, followed by an M or a G.
+    # M means Megabyte, G means Gigabyte.
+    # For example, to set the maximum to 3GB: -Xmx3G
+    # To set the minimum to 2.5GB: -Xms2500M
+    
+    # A good default for a modded server is 4GB.
+    # Uncomment the next line to set it.
+    # -Xmx4G
+    
+    -Xmx"$RAM_GB"G
+    -Xms2"$XMS_GB"G
+    -Dterminal.jline=false
+    -Dterminal.ansi=true
+    -XX:+UseG1GC
+    -XX:+DisableExplicitGC
+    -XX:+AlwaysPreTouch
+    -XX:MaxGCPauseMillis=100
+    -XX:InitiatingHeapOccupancyPercent=25
+    -XX:G1ReservePercent=20
+    -XX:+PerfDisableSharedMem
+EOF
+
+else
+    cat > "$JVM_ARGS_FILE" << EOF
+    # Xmx and Xms set the maximum and minimum RAM usage, respectively.
+    # They can take any number, followed by an M or a G.
+    # M means Megabyte, G means Gigabyte.
+    # For example, to set the maximum to 3GB: -Xmx3G
+    # To set the minimum to 2.5GB: -Xms2500M
+    
+    # A good default for a modded server is 4GB.
+    # Uncomment the next line to set it.
+    # -Xmx4G
+    
+    -Xmx"$RAM_GB"G
+    -Xms2"$XMS_GB"G
+EOF
+
+
+fi
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo ==================================================
+echo  Minecraft EULA
+echo --------------------------------------------------
+echo  By running a Minecraft server you must accept
+echo  the Minecraft End User License Agreement.
+echo
+echo  https://aka.ms/MinecraftEULA
+echo ==================================================
+echo
+
+read -p "Do you accept the Minecraft Eula? (Y/N): " EULA
+
+if [[ -z "$EULA" ]]; then
+  EULA="N"
+fi
+
+EULA_FILE="$Base_Serverpack_Folder/eula.txt"
+if [[ "$EULA" == "Y" ]]; then
+    cat > "$EULA_FILE" << EOF
+    eula=true
+EOF
+fi
+
+if [[ "$EULA" == "N" ]] then
+
+    clear 
+    echo ============================================
+    echo     Serverpack Builder - Beyond Packs
+    echo ============================================
+    echo by Catversal
+    echo
+    echo "[WARN] You did not accept the Minecraft EULA."
+    echo the Server will NOT start until you accept the EULA.
+    echo 
+    echo you can accept it later by editing:
+    echo $Base_Serverpack_Folder\eula.txt
+    sleep 5
+fi
+
+clear
+echo
+echo ============================================
+echo     Serverpack Builder - Beyond Packs
+echo ============================================
+echo by Catversal
+echo
+echo "[INFO] Grabbing Server Icon..."
+sleep 2
+Server-Icon_Script="$Main_Path\config\system-files\linux-files\Server-Icon.sh"
+
+export Base_Serverpack_Folder
+bash "$Server-Icon_Script"
+
+
+if [ "$hostingtype" = "2" ]; then
+
+    clear
+    echo
+    echo ============================================
+    echo  [OK] Serverpack created successfully!
+    echo ============================================
+    echo Pack: $MODPACK_NAME  MODPACK=$MODPACK
+    echo Path: $SERVERPACK
+    echo Forge: $MC_Version-$MANIFEST_FORGE
+    echo ============================================
+    echo Open Serverpack and Use the Run.bat to start the Server.
+    echo.
+    read -p Press Enter to Close
+
+
+
+
+
+
+
+else 
+
+    clear
+    echo
+    echo ============================================
+    echo     Serverpack Builder - Beyond Packs
+    echo ============================================
+    echo
+    echo ============================================
+    echo  [OK] Serverpack created successfully!
+    echo ============================================
+    echo Pack: $MODPACK_NAME  MODPACK=$MODPACK
+    echo Path: $SERVERPACK
+    echo Forge: $MC_Version-$MANIFEST_FORGE
+    echo ============================================
+    echo You can now Upload the Folder to your Hosting.
+    echo Make sure to have a Forge-$MC_Version-$MANIFEST_FORGE Server installed.
+    echo
+    read -p Press Enter to Close
+
+fi
+
+exit 0

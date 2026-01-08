@@ -188,13 +188,13 @@ echo.
 echo [OK] Copy step finished.
 timeout /t 2
 
-Rem LÃ¶schen von Mods
+Rem Löschen von Mods
 
 set "Remove=%ROOT%config\system-files\windows-files\Remove-Lists.bat"
 
 call "%Remove%"
 
-REM ===== Remove-Liste prÃ¼fen =====
+REM ===== Remove-Liste prüfen =====
 if not exist "%REMOVE_LIST%" (
   
   cls
@@ -227,7 +227,7 @@ timeout /t 2
 for /f "usebackq delims=" %%L in ("%REMOVE_LIST%") do (
   set "PREFIX=%%L"
   if not "!PREFIX!"=="" (
-    REM LÃ¶scht Prefix*.jar (falls nichts matcht, passiert nichts)
+    REM Löscht Prefix*.jar (falls nichts matcht, passiert nichts)
     for %%F in ("%SERVERPACK%\mods\!PREFIX!*.jar") do (
       if exist "%%~fF" (
         echo [DEL] %%~nxF
@@ -508,8 +508,6 @@ echo # Xmx and Xms set the maximum and minimum RAM usage, respectively.
     echo -Xms%XMS_GB%G
 
     if /I "%ADD_JVM_ARGS%"=="Y" (
-        echo -Dterminal.jline=false
-        echo -Dterminal.ansi=true
         echo -XX:+UseG1GC
         echo -XX:+DisableExplicitGC
         echo -XX:+AlwaysPreTouch
