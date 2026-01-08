@@ -239,12 +239,12 @@ echo
 echo ==================================================
 echo  [INFO] Java is required to run this server
 echo --------------------------------------------------
-echo  Please make sure you have Java 17, 18 or 21 installed. (not higher versions)
+echo  "Please make sure you have Java 17, 18 or 21 installed. (not higher versions)"
 echo
 echo  Recommended for this server: Java 21 
 echo
-echo  You can download Java (Eclipse Temurin) here:
-echo  https://adoptium.net/de/temurin/releases
+echo  "You can download Java (Eclipse Temurin) here:"
+echo  "https://adoptium.net/de/temurin/releases"
 echo ==================================================
 echo
 echo Press ENTER to continue
