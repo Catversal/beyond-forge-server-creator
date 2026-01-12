@@ -584,8 +584,8 @@ if [[ "$ADD_JVM_ARGS" == "Y" ]]; then
     # Uncomment the next line to set it.
     # -Xmx4G
     
-    -Xmx$RAM_GBG
-    -Xms$XMS_GBG
+    -Xmx${RAM_GB}G
+    -Xms${XMS_GB}G
     -Dterminal.jline=false
     -Dterminal.ansi=true
     -XX:+UseG1GC
@@ -609,8 +609,8 @@ else
     # Uncomment the next line to set it.
     # -Xmx4G
     
-    -Xmx"$RAM_GB"G
-    -Xms2"$XMS_GB"G
+    -Xmx${RAM_GB}G
+    -Xms${XMS_GB}G
 EOF
 
 
