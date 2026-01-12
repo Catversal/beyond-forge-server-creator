@@ -240,7 +240,7 @@ echo [INFO] Detected Modpack:
 echo ====================================================
 echo
 echo   $DisplayName "("$Modpack")"
-echo   MC Version: "$MC_Version" | Forge Version: "$MANIFEST_FORGE" Copy_Tacz= "$Flag"
+echo   MC Version: "$MC_Version" "|" Forge Version: "$MANIFEST_FORGE" Copy_Tacz= "$Flag"
 echo
 sleep 2
 
