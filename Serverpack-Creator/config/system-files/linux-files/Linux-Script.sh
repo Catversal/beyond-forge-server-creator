@@ -671,7 +671,7 @@ echo "[INFO] Grabbing Server Icon..."
 sleep 2
 Server-Icon_Script="$Main_Path/config/system-files/linux-files/Server-Icon.sh"
 
-export Base_Serverpack_Folder
+export Main_Path Lists Modpack Base_Serverpack_Folder 
 source "$Server-Icon_Script"
 
 
