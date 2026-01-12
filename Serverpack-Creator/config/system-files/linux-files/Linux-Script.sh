@@ -302,10 +302,12 @@ cp -r "$Client_Pack/mods" "$Base_Serverpack_Folder/"
 cp -r "$Client_Pack/defaultconfigs" "$Base_Serverpack_Folder/"
 cp -r "$Client_Pack/kubejs" "$Base_Serverpack_Folder/"
 
-if [ -d "$Client_Pack/tacz" ] then
-  echo Copying Tacz Files ...
+if [ -d "$Client_Pack/tacz" ]; then
+  echo "Copying Tacz Files ..."
   cp -r "$Client_Pack/tacz" "$Base_Serverpack_Folder/"
 fi
+
+
 echo
 
 clear
