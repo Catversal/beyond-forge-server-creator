@@ -20,7 +20,7 @@ fi
 
 
 SERVER_ICON=$Base_Serverpack_Folder/server-icon.png
-wget -O "$SERVER_ICON" "$ICON_URL"
+wget -O "$ICON_URL" "$SERVER_ICON" 
 
 
 return
