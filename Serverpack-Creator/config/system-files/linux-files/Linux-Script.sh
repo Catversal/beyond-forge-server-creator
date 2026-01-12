@@ -200,7 +200,7 @@ echo "Name: $MANIFEST_NAME"
 echo "Pack-Version: $MANIFEST_VERSION"
 echo "Minecraft-Version: $MANIFEST_MC_VERSION"
 echo "Forge-Version: $MANIFEST_FORGE"
-read -p
+
 
 clear
 echo
@@ -270,15 +270,17 @@ echo
 sleep 2
 
 # Zielordner anlegen
-
 Count=1
-Base_Serverpack_Folder="$Main_Path/"$DisplayName"_"$MANIFEST_VERSION"_"$Count""
+
+Base_Serverpack_Folder="$Main_Path/${DisplayName}_${MANIFEST_VERSION}_${Count}"
 
 while [ -d "$Base_Serverpack_Folder" ]; do
-  Count=$Count+1
+  Count=$((Count + 1))
+  Base_Serverpack_Folder="$Main_Path/${DisplayName}_${MANIFEST_VERSION}_${Count}"
 done
 
 mkdir -p "$Base_Serverpack_Folder"
+
 
 clear
 echo
