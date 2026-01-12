@@ -200,7 +200,7 @@ echo "Name: $MANIFEST_NAME"
 echo "Pack-Version: $MANIFEST_VERSION"
 echo "Minecraft-Version: $MANIFEST_MC_VERSION"
 echo "Forge-Version: $MANIFEST_FORGE"
-
+read -p
 
 clear
 echo
