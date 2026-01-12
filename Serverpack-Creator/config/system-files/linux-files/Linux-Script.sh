@@ -92,14 +92,109 @@ done
 
 #!/bin/bash
 
+
 MANIFEST="$Client_Pack/manifest.json"
 
-MANIFEST_NAME=$(grep -oP '^\s*"name"\s*:\s*"\K[^"]+' "$MANIFEST")
-MANIFEST_VERSION=$(grep -oP '^\s*"version"\s*:\s*"\K[^"]+' "$MANIFEST")
+if [[ ! -f "$MANIFEST" ]]; then
+  echo "[ERROR] manifest.json nicht gefunden:"
+  echo "  $MANIFEST"
+  exit 1
+fi
 
-MANIFEST_MC_VERSION=$(grep -oP '"minecraft"\s*:\s*\{[\s\S]*?"version"\s*:\s*"\K[^"]+' "$MANIFEST")
+# --- JSON parse (distro-agnostisch): prefer python3, then python, then shell fallback ---
+_parse_manifest_with_python() {
+  "$1" - "$MANIFEST" <<'PY'
+import json, sys
+path = sys.argv[1]
+with open(path, "r", encoding="utf-8") as f:
+    data = json.load(f)
 
-MANIFEST_FORGE=$(grep -oP '"id"\s*:\s*"\Kforge-[^"]+' "$MANIFEST" | head -n1 | sed 's/^forge-//')
+name = data.get("name","")
+version = data.get("version","")
+
+mc = ""
+minecraft = data.get("minecraft") or {}
+mc = minecraft.get("version","")
+
+forge = ""
+for ml in (minecraft.get("modLoaders") or []):
+    _id = (ml or {}).get("id","")
+    if isinstance(_id, str) and _id.startswith("forge-"):
+        forge = _id.split("forge-",1)[1]
+        break
+
+# print 4 lines (safe for bash read)
+print(name)
+print(version)
+print(mc)
+print(forge)
+PY
+}
+
+if command -v python3 >/dev/null 2>&1; then
+  mapfile -t _m < <(_parse_manifest_with_python python3)
+elif command -v python >/dev/null 2>&1; then
+  mapfile -t _m < <(_parse_manifest_with_python python)
+else
+  # --- Shell fallback (best-effort, works for typical CurseForge manifest formatting) ---
+  # NOTE: This is less reliable than python, but avoids hard dependencies.
+  MANIFEST_NAME=$(sed -nE 's/^[[:space:]]*"name"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p' "$MANIFEST" | head -n1)
+  MANIFEST_VERSION=$(sed -nE 's/^[[:space:]]*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p' "$MANIFEST" | head -n1)
+
+  # Try to find minecraft.version in vicinity of "minecraft" block (heuristic)
+  MANIFEST_MC_VERSION=$(
+    awk '
+      /"minecraft"[[:space:]]*:/ {inmc=1}
+      inmc && /"version"[[:space:]]*:/ {
+        if (match($0, /"version"[[:space:]]*:[[:space:]]*"[^"]+"/)) {
+          v=substr($0, RSTART, RLENGTH)
+          sub(/.*"version"[[:space:]]*:[[:space:]]*"/,"",v)
+          sub(/".*/,"",v)
+          print v
+          exit
+        }
+      }
+      inmc && /\}/ { } # keep scanning until found
+    ' "$MANIFEST"
+  )
+
+  # Forge loader id (heuristic: first "forge-...")
+  MANIFEST_FORGE=$(
+    grep -oE '"id"[[:space:]]*:[[:space:]]*"forge-[^"]+"' "$MANIFEST" \
+      | head -n1 \
+      | sed -E 's/.*"forge-([^"]+)".*/\1/'
+  )
+fi
+
+# If python path was used, assign values
+if [[ -n "${_m[0]:-}" ]]; then
+  MANIFEST_NAME="${_m[0]}"
+  MANIFEST_VERSION="${_m[1]}"
+  MANIFEST_MC_VERSION="${_m[2]}"
+  MANIFEST_FORGE="${_m[3]}"
+fi
+
+# Basic validation
+if [[ -z "$MANIFEST_NAME" || -z "$MANIFEST_VERSION" || -z "$MANIFEST_MC_VERSION" || -z "$MANIFEST_FORGE" ]]; then
+  echo "[ERROR] Konnte manifest.json nicht vollständig auslesen."
+  echo "Name='$MANIFEST_NAME' Version='$MANIFEST_VERSION' MC='$MANIFEST_MC_VERSION' Forge='$MANIFEST_FORGE'"
+  echo "Installiere python3 für 100% zuverlässiges Parsing."
+  exit 1
+fi
+
+# For later parts of the script
+MC_Version="$MANIFEST_MC_VERSION"
+
+
+
+#MANIFEST="$Client_Pack/manifest.json"
+
+#MANIFEST_NAME=$(grep -oP '^\s*"name"\s*:\s*"\K[^"]+' "$MANIFEST")
+#MANIFEST_VERSION=$(grep -oP '^\s*"version"\s*:\s*"\K[^"]+' "$MANIFEST")
+
+#MANIFEST_MC_VERSION=$(grep -oP '"minecraft"\s*:\s*\{[\s\S]*?"version"\s*:\s*"\K[^"]+' "$MANIFEST")
+
+#MANIFEST_FORGE=$(grep -oP '"id"\s*:\s*"\Kforge-[^"]+' "$MANIFEST" | head -n1 | sed 's/^forge-//')
 
 echo "Name: $MANIFEST_NAME"
 echo "Pack-Version: $MANIFEST_VERSION"
