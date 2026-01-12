@@ -304,7 +304,7 @@ cp -r "$Client_Pack/kubejs" "$Base_Serverpack_Folder/"
 
 if $Flag==1; then
   echo Copying Tacz Files ...
-  cp -r "$Client_Pack/tacz_backup" "$Base_Serverpack_Folder/"
+  cp -r "$Client_Pack/tacz" "$Base_Serverpack_Folder/"
 fi
 echo
 
