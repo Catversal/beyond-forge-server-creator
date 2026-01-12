@@ -688,7 +688,7 @@ if [ "$hostingtype" = "2" ]; then
     echo ============================================
     echo Open Serverpack and Use the Run.bat to start the Server.
     echo
-    read -p Press Enter to Close
+    read -p "Press Enter to Close"
 
 
 
@@ -714,7 +714,7 @@ else
     echo You can now Upload the Folder to your Hosting.
     echo Make sure to have a Forge-"$MC_Version-$MANIFEST_FORGE" Server installed.
     echo
-    read -p Press Enter to Close
+    read -p "Press Enter to Close"
 
 fi
 
