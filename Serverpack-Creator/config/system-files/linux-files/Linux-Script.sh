@@ -656,7 +656,7 @@ if [[ "$EULA" == "N" ]] then
     echo the Server will NOT start until you accept the EULA.
     echo 
     echo you can accept it later by editing:
-    echo $Base_Serverpack_Folder\eula.txt
+    echo $Base_Serverpack_Folder/eula.txt
     sleep 5
 fi
 
@@ -669,7 +669,7 @@ echo by Catversal
 echo
 echo "[INFO] Grabbing Server Icon..."
 sleep 2
-Server-Icon_Script="$Main_Path\config\system-files\linux-files\Server-Icon.sh"
+Server-Icon_Script="$Main_Path/config/system-files/linux-files/Server-Icon.sh"
 
 export Base_Serverpack_Folder
 source "$Server-Icon_Script"
@@ -686,7 +686,7 @@ if [ "$hostingtype" = "2" ]; then
     echo Path: "$Base_Serverpack_Folder"
     echo Forge: "$MC_Version-$MANIFEST_FORGE"
     echo ============================================
-    echo Open Serverpack and Use the Run.bat to start the Server.
+    echo Open Serverpack and Use the Run.sh to start the Server.
     echo
     read -p "Press Enter to Close"
 
