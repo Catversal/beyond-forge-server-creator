@@ -680,12 +680,12 @@ if [ "$hostingtype" = "2" ]; then
     echo ============================================
     echo  [OK] Serverpack created successfully!
     echo ============================================
-    echo Pack: $MODPACK_NAME  MODPACK=$MODPACK
-    echo Path: $SERVERPACK
-    echo Forge: $MC_Version-$MANIFEST_FORGE
+    echo Pack: "$MODPACK_NAME"  MODPACK="$MODPACK"
+    echo Path: "$Base_Serverpack_Folder"
+    echo Forge: "$MC_Version-$MANIFEST_FORGE"
     echo ============================================
     echo Open Serverpack and Use the Run.bat to start the Server.
-    echo.
+    echo
     read -p Press Enter to Close
 
 
@@ -705,12 +705,12 @@ else
     echo ============================================
     echo  [OK] Serverpack created successfully!
     echo ============================================
-    echo Pack: $MODPACK_NAME  MODPACK=$MODPACK
-    echo Path: $SERVERPACK
-    echo Forge: $MC_Version-$MANIFEST_FORGE
+    echo Pack: "$MODPACK_NAME"  MODPACK="$MODPACK"
+    echo Path: "$Main_Path"
+    echo Forge: "$MC_Version"-"$MANIFEST_FORGE"
     echo ============================================
     echo You can now Upload the Folder to your Hosting.
-    echo Make sure to have a Forge-$MC_Version-$MANIFEST_FORGE Server installed.
+    echo Make sure to have a Forge-"$MC_Version-$MANIFEST_FORGE" Server installed.
     echo
     read -p Press Enter to Close
 
