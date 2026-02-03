@@ -1,4 +1,4 @@
-﻿echo off >nul
+echo off >nul
 chcp 65001 >nul
 setlocal EnableExtensions EnableDelayedExpansion
 
