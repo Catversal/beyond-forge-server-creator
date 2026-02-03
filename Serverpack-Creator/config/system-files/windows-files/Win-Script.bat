@@ -188,13 +188,13 @@ echo.
 echo [OK] Copy step finished.
 timeout /t 2
 
-Rem Lˆschen von Mods
+Rem Lùschen von Mods
 
 set "Remove=%ROOT%config\system-files\windows-files\Remove-Lists.bat"
 
 call "%Remove%"
 
-REM ===== Remove-Liste pr¸fen =====
+REM ===== Remove-Liste prùfen =====
 if not exist "%REMOVE_LIST%" (
   
   cls
@@ -227,7 +227,7 @@ timeout /t 2
 for /f "usebackq delims=" %%L in ("%REMOVE_LIST%") do (
   set "PREFIX=%%L"
   if not "!PREFIX!"=="" (
-    REM Lˆscht Prefix*.jar (falls nichts matcht, passiert nichts)
+    REM Lùscht Prefix*.jar (falls nichts matcht, passiert nichts)
     for %%F in ("%SERVERPACK%\mods\!PREFIX!*.jar") do (
       if exist "%%~fF" (
         echo [DEL] %%~nxF
