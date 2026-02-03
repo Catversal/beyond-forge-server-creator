@@ -1,5 +1,6 @@
 echo off >nul
 chcp 65001 >nul
+setlocal EnableExtensions EnableDelayedExpansion
 
 if exist "%CLIENT_PACK%" goto :ClientPackNMissing
 mkdir "%Root%client_pack" >nul
