@@ -1,6 +1,6 @@
 echo off >nul
 chcp 65001 >nul
-setlocal EnableExtensions EnableDelayedExpansion
+
 REM List to Set Removal list based on Modpack
 
 
