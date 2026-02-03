@@ -1,4 +1,6 @@
-echo off >nul
+﻿echo off >nul
+chcp 65001 >nul
+setlocal EnableExtensions EnableDelayedExpansion
 REM Script to Grab Server Icon from Curseforge Page
 
 REM Beyond Ascension

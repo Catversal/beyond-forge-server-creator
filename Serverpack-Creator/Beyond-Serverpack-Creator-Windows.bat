@@ -1,5 +1,7 @@
-@echo off
+﻿@echo off
+chcp 65001 >nul
 setlocal EnableExtensions EnableDelayedExpansion
+
 REM Main Path
 
 set "ROOT=%~dp0"

@@ -1,4 +1,6 @@
-echo off >nul
+ï»¿echo off >nul
+chcp 65001 >nul
+setlocal EnableExtensions EnableDelayedExpansion
 
 if exist "%CLIENT_PACK%" goto :ClientPackNMissing
 mkdir "%Root%client_pack" >nul
@@ -188,13 +190,13 @@ echo.
 echo [OK] Copy step finished.
 timeout /t 2
 
-Rem Löschen von Mods
+Rem Lï¿½schen von Mods
 
 set "Remove=%ROOT%config\system-files\windows-files\Remove-Lists.bat"
 
 call "%Remove%"
 
-REM ===== Remove-Liste prüfen =====
+REM ===== Remove-Liste prï¿½fen =====
 if not exist "%REMOVE_LIST%" (
   
   cls
@@ -227,7 +229,7 @@ timeout /t 2
 for /f "usebackq delims=" %%L in ("%REMOVE_LIST%") do (
   set "PREFIX=%%L"
   if not "!PREFIX!"=="" (
-    REM Löscht Prefix*.jar (falls nichts matcht, passiert nichts)
+    REM Lï¿½scht Prefix*.jar (falls nichts matcht, passiert nichts)
     for %%F in ("%SERVERPACK%\mods\!PREFIX!*.jar") do (
       if exist "%%~fF" (
         echo [DEL] %%~nxF
