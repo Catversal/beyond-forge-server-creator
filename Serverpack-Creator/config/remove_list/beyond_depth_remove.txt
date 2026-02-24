@@ -41,3 +41,4 @@ visual_keybinder
 YungsMenuTweaks
 dynview
 tooltipoverhaul
+aaa_particles
