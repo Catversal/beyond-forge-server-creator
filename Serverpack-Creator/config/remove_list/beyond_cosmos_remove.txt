@@ -30,3 +30,5 @@ visuality-forge
 visual_keybinder
 dynview
 tooltipoverhaul
+aaa_particles
+
