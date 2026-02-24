@@ -42,3 +42,4 @@ YungsMenuTweaks
 dynview
 darkness
 tooltipoverhaul
+aaa_particles
