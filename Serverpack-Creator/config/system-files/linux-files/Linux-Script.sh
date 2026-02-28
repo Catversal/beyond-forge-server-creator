@@ -323,7 +323,6 @@ echo     Serverpack Builder - Beyond Packs
 echo ============================================
 echo by Catversal
 echo
-  cp -r "$Client_Pack/tacz" "$Base_Serverpac
 echo ====================================================
 echo [INFO] Serverpack Copy Complete!
 echo ====================================================
