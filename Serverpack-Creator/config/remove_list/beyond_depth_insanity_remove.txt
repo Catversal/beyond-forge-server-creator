@@ -14,8 +14,8 @@ Ding
 EnhancedVisuals_FORGE
 enhanced_boss_bars
 entityculling-forge
-entity_model_features_forge
-entity_texture_features_forge
+entity_model_features
+entity_texture_features
 EuphoriaPatcher
 fancymenu
 gpumemleakfix
