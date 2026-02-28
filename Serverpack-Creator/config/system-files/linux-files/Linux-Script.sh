@@ -307,10 +307,10 @@ if [ -d "$Client_Pack/tacz" ]; then
   cp -r "$Client_Pack/tacz" "$Base_Serverpack_Folder/"
 fi
 
-# Rename Indestructible Server Fix mod to .disabled
+# Remove .disabled from Indestructible Server Fix mod
 INDESTRUCTIBLE_MOD="$Base_Serverpack_Folder/mods/Indestructible Server Fix-1.0.jar.disabled"
 if [ -f "$INDESTRUCTIBLE_MOD" ]; then
-    mv "$INDESTRUCTIBLE_MOD" "$INDESTRUCTIBLE_MOD"
+    mv "$INDESTRUCTIBLE_MOD" "${INDESTRUCTIBLE_MOD%.disabled}"
     echo "[Info] Enabled: Indestructible Server Fix-1.0.jar"
 fi
 
