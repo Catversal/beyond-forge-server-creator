@@ -307,6 +307,13 @@ if [ -d "$Client_Pack/tacz" ]; then
   cp -r "$Client_Pack/tacz" "$Base_Serverpack_Folder/"
 fi
 
+# Rename Indestructible Server Fix mod to .disabled
+INDESTRUCTIBLE_MOD="$Base_Serverpack_Folder/mods/Indestructible Server Fix-1.0.jar"
+if [ -f "$INDESTRUCTIBLE_MOD" ]; then
+    mv "$INDESTRUCTIBLE_MOD" "$INDESTRUCTIBLE_MOD.disabled"
+    echo "[Info] Disabled: Indestructible Server Fix-1.0.jar"
+fi
+
 
 echo
 
@@ -316,6 +323,7 @@ echo     Serverpack Builder - Beyond Packs
 echo ============================================
 echo by Catversal
 echo
+  cp -r "$Client_Pack/tacz" "$Base_Serverpac
 echo ====================================================
 echo [INFO] Serverpack Copy Complete!
 echo ====================================================
