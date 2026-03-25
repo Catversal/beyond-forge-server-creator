@@ -50,3 +50,6 @@ visual_keybinder
 visuality-forge
 YungsMenuTweaks
 zylob
+embeddium
+ImmersiveUI-FORGE
+immersiveoverlays
