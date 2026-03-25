@@ -76,3 +76,4 @@ dynview
 tooltipoverhaul
 aaa_particles
 emberstextapi
+extrasounds

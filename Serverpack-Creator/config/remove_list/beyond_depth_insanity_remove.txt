@@ -44,3 +44,5 @@ darkness
 tooltipoverhaul
 aaa_particles
 emberstextapi
+extrasounds
+
