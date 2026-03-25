@@ -2,3 +2,5 @@
 2|Beyond Cosmo|Beyond Cosmo|1.20.1|1
 3|Beyond Depth|Beyond Depth|1.20.1|0
 4|Beyond Depth Insanity|Beyond Depth Insanity|1.20.1|0
+5|Beyond Ocean|Beyond Ocean|1.20.1|0
+6|Beyond Zombie|Beyond Zombie|1.20.1|1

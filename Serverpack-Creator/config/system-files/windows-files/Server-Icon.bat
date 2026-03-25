@@ -21,6 +21,15 @@ if "%MODPACK%"=="4" (
     set "ICON_URL=https://media.forgecdn.net/avatars/thumbnails/1302/847/64/64/638846973151715653.png"
 )
 
+REM Beyond Ocean
+if "%MODPACK%"=="5" (
+    set "ICON_URL=https://media.forgecdn.net/avatars/thumbnails/1716/656/64/64/639091544197423497_animated.gif"
+)
+
+REM Beyond Zombie
+if "%MODPACK%"=="6" (
+    set "ICON_URL=https://media.forgecdn.net/avatars/thumbnails/1387/655/64/64/638899776307364304.png"
+)
 
 powershell -Command ^
     "Invoke-WebRequest '%ICON_URL%' -OutFile '%SERVERPACK%\server-icon.png'"
