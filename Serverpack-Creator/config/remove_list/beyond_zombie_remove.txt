@@ -50,5 +50,4 @@ visual_keybinder
 visuality-forge
 YungsMenuTweaks
 zylob
-emberstextapi
 extrasounds

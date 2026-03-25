@@ -53,5 +53,4 @@ zylob
 embeddium
 ImmersiveUI-FORGE
 immersiveoverlays
-emberstextapi
 extrasounds

@@ -75,5 +75,4 @@ visual_keybinder
 dynview
 tooltipoverhaul
 aaa_particles
-emberstextapi
 extrasounds
