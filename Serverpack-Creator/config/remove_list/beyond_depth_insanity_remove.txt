@@ -43,3 +43,4 @@ dynview
 darkness
 tooltipoverhaul
 aaa_particles
+emberstextapi
