@@ -1,5 +1,6 @@
 BadOptimizations
 betterbiomereblend
+aaa-particles
 BetterF3
 betterfpsdist
 CraftPresence
