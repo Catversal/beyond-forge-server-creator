@@ -39,7 +39,6 @@ sodiumoptionsapi-forge
 visuality-forge
 visual_keybinder
 YungsMenuTweaks
-zylob
 epictweaks
 efbowtweak
 dynview
