@@ -31,6 +31,10 @@ if "%MODPACK%"=="6" (
     set "ICON_URL=https://media.forgecdn.net/avatars/thumbnails/1387/655/64/64/638899776307364304.png"
 )
 
+REM Beyond Shenanigans
+if "%MODPACK%"=="7" (
+    set "ICON_URL=https://media.forgecdn.net/avatars/1775/174/639127323231011260.webp"
+
 powershell -Command ^
     "Invoke-WebRequest '%ICON_URL%' -OutFile '%SERVERPACK%\server-icon.png'"
 
