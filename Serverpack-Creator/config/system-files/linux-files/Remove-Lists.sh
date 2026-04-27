@@ -21,6 +21,9 @@ elif [ "$Modpack" = "5" ]; then
 
 elif [ "$Modpack" = "6" ]; then
   REMOVE_LIST="$Lists/beyond_zombie_remove.txt"
+
+elif [ "$Modpack" = "7" ]; then
+  REMOVE_LIST="$Lists/beyond_shenanigans_remove.txt"
   
 fi
 
