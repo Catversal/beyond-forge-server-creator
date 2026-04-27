@@ -21,6 +21,9 @@ elif [ "$Modpack" = "5" ]; then
 elif [ "$Modpack" = "6" ]; then
     ICON_URL="https://media.forgecdn.net/avatars/thumbnails/1387/655/64/64/638899776307364304.png"
 
+elif [ "$Modpack" = "7" ]; then
+    ICON_URL="https://media.forgecdn.net/avatars/1775/174/639127323231011260.webp"
+    
 fi
 
 
