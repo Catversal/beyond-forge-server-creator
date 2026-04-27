@@ -22,5 +22,8 @@ if "%MODPACK%"=="5" set "REMOVE_LIST=%LISTS%\beyond_ocean_remove.txt"
 REM Beyond Zombie
 if "%MODPACK%"=="6" set "REMOVE_LIST=%LISTS%\beyond_zombie_remove.txt"
 
+REM Beyond Shenanigans
+if "%MODPACK%"=="7" set "REMOVE_LIST=%LISTS%\beyond_shenanigans_remove.txt"
+
 exit /b
 
