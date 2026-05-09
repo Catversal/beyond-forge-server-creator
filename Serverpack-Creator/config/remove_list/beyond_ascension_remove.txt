@@ -50,4 +50,7 @@ aaa_particles
 immersivedamageindicators
 extrasounds
 zylob
+ssrcamerafixes
+betterlockon
+lockonmovementfix
 
