@@ -45,7 +45,6 @@ efbowtweak
 dynview
 tooltipoverhaul
 caxton
-Epic Fight x Curios Compat
 aaa_particles
 immersivedamageindicators
 extrasounds
