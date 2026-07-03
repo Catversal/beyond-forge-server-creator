@@ -3,5 +3,5 @@
 3|Beyond Depth|Beyond Depth|1.20.1|0
 4|Beyond Depth Insanity|Beyond Depth Insanity|1.20.1|0
 5|Beyond Ocean|Beyond Ocean|1.20.1|0
-6|Beyond Zombie|Beyond Zombie|1.20.1|1
+6|Beyond Extinction|Beyond Extinction|1.20.1|1
 7|Beyond Shenanigans|Beyond Shenanigans|1.20.1|0
