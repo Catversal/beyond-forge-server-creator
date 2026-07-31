@@ -36,3 +36,5 @@ dotf
 fabridge
 clockworklib
 extrasounds
+colorwheel_patcher-forge
+colorwheel-forge
