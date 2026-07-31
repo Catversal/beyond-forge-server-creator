@@ -53,3 +53,5 @@ ssrcamerafixes
 betterlockon
 lockonmovementfix
 bettermountsteering
+colorwheel_patcher-forge
+colorwheel-forge
