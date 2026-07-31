@@ -45,4 +45,6 @@ darkness
 tooltipoverhaul
 aaa_particles
 extrasounds
+colorwheel_patcher-forge
+colorwheel-forge
 
