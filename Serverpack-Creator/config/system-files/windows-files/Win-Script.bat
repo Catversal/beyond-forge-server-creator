@@ -188,13 +188,13 @@ echo.
 echo [OK] Copy step finished.
 timeout /t 2
 
-Rem Lùschen von Mods
+Rem L¬ùschen von Mods
 
 set "Remove=%ROOT%config\system-files\windows-files\Remove-Lists.bat"
 
 call "%Remove%"
 
-REM ===== Remove-Liste prùfen =====
+REM ===== Remove-Liste pr¬ùfen =====
 if not exist "%REMOVE_LIST%" (
   
   cls
@@ -227,7 +227,7 @@ timeout /t 2
 for /f "usebackq delims=" %%L in ("%REMOVE_LIST%") do (
   set "PREFIX=%%L"
   if not "!PREFIX!"=="" (
-    REM Lùscht Prefix*.jar (falls nichts matcht, passiert nichts)
+    REM L¬ùscht Prefix*.jar (falls nichts matcht, passiert nichts)
     for %%F in ("%SERVERPACK%\mods\!PREFIX!*.jar") do (
       if exist "%%~fF" (
         echo [DEL] %%~nxF
@@ -562,25 +562,25 @@ if /I "%ACCEPT_EULA%"=="Y" (
 
 :SkipRAMSetup
 
-cls
-echo.
-echo ============================================
-echo     Serverpack Builder - Beyond Packs
-echo ============================================
-echo by Catversal
-echo.
-echo [INFO] Grabbing Server Icon...
-
-REM --- Download server icon ---
-
-set "Server-Icon_Script=%ROOT%config\system-files\windows-files\Server-Icon.bat"
-
-echo Server-Icon set: %SERVERPACK%\server-icon.png
-
-call "%Server-Icon_Script%"
-
-if "%hostingtype%"=="1" goto :SkipJ
-goto :FinalMessage
+#cls
+#echo.
+#echo ============================================
+#echo     Serverpack Builder - Beyond Packs
+#echo ============================================
+#echo by Catversal
+#echo.
+#echo [INFO] Grabbing Server Icon...
+#
+#REM --- Download server icon ---#
+#
+#set "Server-Icon_Script=%ROOT%config\system-files\windows-files\Server-Icon.bat"
+#
+#echo Server-Icon set: %SERVERPACK%\server-icon.png
+#
+#call "%Server-Icon_Script%"
+#
+#if "%hostingtype%"=="1" goto :SkipJ
+#goto :FinalMessage
 
 :SkipJ
 
