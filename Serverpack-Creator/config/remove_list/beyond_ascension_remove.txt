@@ -60,7 +60,6 @@ chat_heads
 cherishedworlds
 cinematiczoom
 controlling
-coolrain
 customcredits
 eatinganimation
 embeddium
@@ -75,13 +74,10 @@ moreoverlays
 mousetweaks
 myserveriscompatible
 overflowingbars
-particle_effects
-particular
 presencefootsteps
 searchables
 seramicx_smooth_f5 (not sure)
 sound_physics_remastered
-statuseffectbars
 stylisheffects
 swinginglanterns
 travelerstitles
