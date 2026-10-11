@@ -78,7 +78,6 @@ overflowingbars
 particle_effects
 particular
 presencefootsteps
-radiantgear
 searchables
 seramicx_smooth_f5 (not sure)
 sound_physics_remastered
