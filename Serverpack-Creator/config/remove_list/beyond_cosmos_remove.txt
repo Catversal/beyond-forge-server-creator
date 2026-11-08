@@ -32,7 +32,6 @@ visual_keybinder
 dynview
 tooltipoverhaul
 aaa_particles
-clockworklib
 extrasounds
 colorwheel_patcher-forge
 colorwheel-forge
