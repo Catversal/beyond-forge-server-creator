@@ -32,7 +32,6 @@ visual_keybinder
 dynview
 tooltipoverhaul
 aaa_particles
-dotf
 fabridge
 clockworklib
 extrasounds
