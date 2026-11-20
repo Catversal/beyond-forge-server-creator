@@ -31,7 +31,6 @@ visuality-forge
 visual_keybinder
 dynview
 tooltipoverhaul
-aaa_particles
 extrasounds
 colorwheel_patcher-forge
 colorwheel-forge
